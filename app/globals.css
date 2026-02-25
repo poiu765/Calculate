@@ -8,8 +8,14 @@
   color-scheme: light;
 }
 
+html,
 body {
-  @apply bg-white text-black font-body;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body {
+  @apply font-body;
 }
 
 * {
