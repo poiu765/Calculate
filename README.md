@@ -50,6 +50,16 @@ select * from attempts; -- should show only own
 - Due items are served first; if none are due, new problems are generated.
 - New questions only create SRS items when wrong or too slow.
 
+## 1차 완성본 체크리스트
+
+- [x] 로그인/회원가입 화면
+- [x] 학생 대시보드 + 연습 흐름
+- [x] 교사 대시보드 + 학생 상세
+- [x] SRS 리스트/필터 + due 연습
+- [x] SRS 생성/업데이트 로직
+- [x] Supabase schema + RLS SQL
+- [x] 기본 UI/UX 폴리시
+
 ## Project Structure
 
 - `app/` — App Router pages and API routes

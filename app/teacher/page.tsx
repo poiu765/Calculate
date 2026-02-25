@@ -84,7 +84,9 @@ export default async function TeacherPage() {
                   className="flex items-center justify-between rounded-md border border-black/10 px-3 py-2 text-sm"
                 >
                   <span>{student.display_name || "Unnamed"}</span>
-                  <span className="text-xs text-black/60">Details</span>
+                  <span className="rounded-full bg-black/5 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-black/60">
+                    View
+                  </span>
                 </Link>
               ))
             ) : (

@@ -17,6 +17,12 @@ export default function PracticePage() {
   const [loading, setLoading] = useState(true);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
+  const [sessionCount, setSessionCount] = useState(0);
+  const [sessionCorrect, setSessionCorrect] = useState(0);
+  const [lastResult, setLastResult] = useState<{
+    isCorrect: boolean;
+    timeMs: number;
+  } | null>(null);
 
   const targetMs = useMemo(() => getTargetMs(deck), [deck]);
 
@@ -49,9 +55,12 @@ export default function PracticePage() {
     const data = await res.json();
     if (data.is_correct) {
       setStatus("correct");
+      setSessionCorrect((prev) => prev + 1);
     } else {
       setStatus("wrong");
     }
+    setSessionCount((prev) => prev + 1);
+    setLastResult({ isCorrect: data.is_correct, timeMs });
 
     setTimeout(() => {
       loadQuestion();
@@ -136,6 +145,27 @@ export default function PracticePage() {
         ) : (
           <p className="text-sm text-black/70">No question available.</p>
         )}
+      </Card>
+
+      <Card className="space-y-2">
+        <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-black/50">
+          <span>Session</span>
+          <span className="rounded-full bg-accent-yellow px-2 py-1">
+            {sessionCount} attempts
+          </span>
+        </div>
+        <p className="text-sm text-black/70">
+          Correct: {sessionCorrect} • Accuracy:{" "}
+          {sessionCount ? Math.round((sessionCorrect / sessionCount) * 100) : 0}%
+        </p>
+        {lastResult && (
+          <p className="text-xs text-black/60">
+            Last: {lastResult.isCorrect ? "Correct" : "Wrong"} • {lastResult.timeMs} ms
+          </p>
+        )}
+        <p className="text-xs text-black/50">
+          Tip: stop after 20 focused reps, then take a short break.
+        </p>
       </Card>
 
       <Keypad
