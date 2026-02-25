@@ -16,7 +16,7 @@ export default async function StudentPage() {
 
   const { data: attempts } = await supabase
     .from("attempts")
-    .select("is_correct, created_at")
+    .select("is_correct, created_at, time_ms")
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
     .limit(200);
@@ -24,6 +24,17 @@ export default async function StudentPage() {
   const totalAttempts = attempts?.length ?? 0;
   const correctAttempts = attempts?.filter((a) => a.is_correct).length ?? 0;
   const accuracy = totalAttempts ? Math.round((correctAttempts / totalAttempts) * 100) : 0;
+
+  const now = Date.now();
+  const last7 = attempts?.filter((a) => {
+    const t = new Date(a.created_at).getTime();
+    return now - t <= 7 * 24 * 60 * 60 * 1000;
+  });
+  const last7Count = last7?.length ?? 0;
+  const avgTime =
+    attempts && attempts.length
+      ? Math.round(attempts.reduce((acc, cur) => acc + cur.time_ms, 0) / attempts.length)
+      : 0;
 
   const { data: dueItems } = await supabase
     .from("srs_items")
@@ -45,6 +56,12 @@ export default async function StudentPage() {
         <Stat label="Total attempts" value={totalAttempts} />
         <Stat label="Accuracy" value={`${accuracy}%`} />
         <Stat label="Due reviews" value={dueItems?.length ?? 0} />
+      </section>
+
+      <section className="grid gap-3 md:grid-cols-3">
+        <Stat label="Avg time (ms)" value={avgTime || "--"} />
+        <Stat label="Last 7 days" value={last7Count} />
+        <Stat label="Active decks" value="A + B" />
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">

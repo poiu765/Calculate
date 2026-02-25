@@ -26,6 +26,13 @@ export default async function StudentDetailPage({
   const total = attempts?.length ?? 0;
   const correct = attempts?.filter((a) => a.is_correct).length ?? 0;
   const accuracy = total ? Math.round((correct / total) * 100) : 0;
+  const avgTime =
+    attempts && attempts.length
+      ? Math.round(attempts.reduce((acc, cur) => acc + cur.time_ms, 0) / attempts.length)
+      : 0;
+  const now = Date.now();
+  const last7 = attempts?.filter((a) => now - new Date(a.created_at).getTime() <= 604800000)
+    .length;
 
   const deckA = attempts?.filter((a) => a.deck === "A") ?? [];
   const deckB = attempts?.filter((a) => a.deck === "B") ?? [];
@@ -62,6 +69,25 @@ export default async function StudentDetailPage({
           <p className="text-xs text-black/60">Deck split</p>
           <p className="text-sm">Deck A: {deckA.length}</p>
           <p className="text-sm">Deck B: {deckB.length}</p>
+        </Card>
+      </section>
+
+      <section className="grid gap-3 md:grid-cols-3">
+        <Card>
+          <p className="text-xs text-black/60">Avg time (ms)</p>
+          <p className="text-2xl font-semibold">{avgTime || "--"}</p>
+        </Card>
+        <Card>
+          <p className="text-xs text-black/60">Last 7 days</p>
+          <p className="text-2xl font-semibold">{last7 ?? 0}</p>
+        </Card>
+        <Card>
+          <p className="text-xs text-black/60">Most recent</p>
+          <p className="text-sm text-black/70">
+            {attempts?.[0]
+              ? new Date(attempts[0].created_at).toLocaleString()
+              : "No attempts"}
+          </p>
         </Card>
       </section>
 

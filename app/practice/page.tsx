@@ -16,6 +16,7 @@ export default function PracticePage() {
   const [status, setStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [loading, setLoading] = useState(true);
   const [startTime, setStartTime] = useState<number | null>(null);
+  const [elapsed, setElapsed] = useState(0);
 
   const targetMs = useMemo(() => getTargetMs(deck), [deck]);
 
@@ -28,6 +29,7 @@ export default function PracticePage() {
     setQuestion(data.question ?? null);
     setLoading(false);
     setStartTime(performance.now());
+    setElapsed(0);
   }
 
   async function handleSubmit() {
@@ -79,6 +81,14 @@ export default function PracticePage() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [loading, status, answer, question, startTime]);
 
+  useEffect(() => {
+    if (loading || status !== "idle" || startTime === null) return;
+    const id = window.setInterval(() => {
+      setElapsed(Math.round(performance.now() - startTime));
+    }, 100);
+    return () => window.clearInterval(id);
+  }, [loading, status, startTime]);
+
   return (
     <main className="space-y-6">
       <header className="space-y-2">
@@ -98,12 +108,20 @@ export default function PracticePage() {
               <span className="rounded-full bg-accent-green px-2 py-1">{question.op_type}</span>
             </div>
             <p className="text-3xl font-semibold">{question.prompt}</p>
-            <input
-              className="w-full rounded-md border border-black/20 px-3 py-2 text-lg"
-              value={answer}
-              onChange={(event) => setAnswer(event.target.value)}
-              placeholder="Type your answer"
-            />
+            <div className="space-y-2">
+              <label className="text-xs font-semibold uppercase tracking-wide text-black/60">
+                Answer
+              </label>
+              <input
+                className="w-full rounded-md border border-black/20 px-3 py-2 text-lg"
+                value={answer}
+                onChange={(event) => setAnswer(event.target.value)}
+                placeholder="Type your answer"
+              />
+              <p className="text-xs text-black/50">
+                Time: {elapsed} ms • Target {targetMs} ms.
+              </p>
+            </div>
             {status === "correct" && (
               <p className="text-sm font-semibold text-black">
                 Correct. Nice speed.
@@ -120,7 +138,12 @@ export default function PracticePage() {
         )}
       </Card>
 
-      <Keypad value={answer} onChange={setAnswer} onSubmit={handleSubmit} />
+      <Keypad
+        value={answer}
+        onChange={setAnswer}
+        onSubmit={handleSubmit}
+        disabled={loading || status !== "idle"}
+      />
     </main>
   );
 }
