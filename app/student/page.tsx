@@ -49,7 +49,11 @@ export default async function StudentPage() {
 
       <section className="grid gap-4 md:grid-cols-2">
         <Card className="space-y-4">
-          <h2 className="text-lg font-semibold">Deck A</h2>
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-black/60">
+            <span className="h-2 w-2 rounded-full bg-accent-yellow" />
+            Deck A
+          </div>
+          <h2 className="text-lg font-semibold">3-digit addition/subtraction</h2>
           <p className="text-sm text-black/70">3-digit addition and subtraction.</p>
           <div className="flex gap-2">
             <Link
@@ -61,7 +65,11 @@ export default async function StudentPage() {
           </div>
         </Card>
         <Card className="space-y-4">
-          <h2 className="text-lg font-semibold">Deck B</h2>
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-black/60">
+            <span className="h-2 w-2 rounded-full bg-accent-green" />
+            Deck B
+          </div>
+          <h2 className="text-lg font-semibold">2-digit multiply/divide</h2>
           <p className="text-sm text-black/70">2-digit multiplication and division.</p>
           <div className="flex gap-2">
             <Link

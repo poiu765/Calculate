@@ -16,7 +16,7 @@ export default function HomePage() {
       <div className="flex flex-wrap gap-3">
         <Link
           href="/login"
-          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white"
+          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-soft"
         >
           Sign in / Sign up
         </Link>

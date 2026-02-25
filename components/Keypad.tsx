@@ -19,7 +19,7 @@ export function Keypad({ value, onChange, onSubmit }: KeypadProps) {
             key={key}
             type="button"
             onClick={() => onChange(value + key)}
-            className="rounded-lg border border-black/20 py-3 text-lg font-semibold"
+            className="rounded-xl border border-black/20 bg-white py-3 text-lg font-semibold shadow-sm active:scale-[0.98]"
           >
             {key}
           </button>
@@ -27,14 +27,14 @@ export function Keypad({ value, onChange, onSubmit }: KeypadProps) {
         <button
           type="button"
           onClick={() => onChange(value.slice(0, -1))}
-          className="rounded-lg border border-black/20 py-3 text-sm font-semibold"
+          className="rounded-xl border border-black/20 bg-white py-3 text-sm font-semibold shadow-sm active:scale-[0.98]"
         >
           Back
         </button>
         <button
           type="button"
           onClick={() => onChange("")}
-          className="rounded-lg border border-black/20 py-3 text-sm font-semibold"
+          className="rounded-xl border border-black/20 bg-white py-3 text-sm font-semibold shadow-sm active:scale-[0.98]"
         >
           Clear
         </button>

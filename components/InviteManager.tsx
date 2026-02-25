@@ -44,7 +44,7 @@ export function InviteManager() {
       {error && <p className="text-xs text-red-600">{error}</p>}
       <div className="space-y-2">
         {invites.map((invite) => (
-          <div key={invite.code} className="rounded-md border border-black/10 p-3 text-sm">
+          <div key={invite.code} className="rounded-md border border-black/10 p-3 text-sm shadow-sm">
             <div className="flex items-center justify-between">
               <span className="font-semibold">{invite.code}</span>
               <span className="text-xs text-black/60">

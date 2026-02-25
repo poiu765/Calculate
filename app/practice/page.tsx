@@ -93,6 +93,10 @@ export default function PracticePage() {
           <p className="text-sm text-black/70">Loading question...</p>
         ) : question ? (
           <>
+            <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-black/50">
+              <span className="rounded-full bg-accent-yellow px-2 py-1">Deck {deck}</span>
+              <span className="rounded-full bg-accent-green px-2 py-1">{question.op_type}</span>
+            </div>
             <p className="text-3xl font-semibold">{question.prompt}</p>
             <input
               className="w-full rounded-md border border-black/20 px-3 py-2 text-lg"
@@ -101,10 +105,14 @@ export default function PracticePage() {
               placeholder="Type your answer"
             />
             {status === "correct" && (
-              <p className="text-sm font-semibold text-green-700">Correct!</p>
+              <p className="text-sm font-semibold text-black">
+                Correct. Nice speed.
+              </p>
             )}
             {status === "wrong" && (
-              <p className="text-sm font-semibold text-red-700">Try the next one.</p>
+              <p className="text-sm font-semibold text-black">
+                Logged. Keep going.
+              </p>
             )}
           </>
         ) : (

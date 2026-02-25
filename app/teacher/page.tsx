@@ -26,11 +26,17 @@ export default async function TeacherPage() {
 
       <section className="grid gap-4 md:grid-cols-2">
         <Card className="space-y-4">
-          <h2 className="text-lg font-semibold">Invite codes</h2>
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-black/60">
+            <span className="h-2 w-2 rounded-full bg-accent-yellow" />
+            Invite codes
+          </div>
           <InviteManager />
         </Card>
         <Card className="space-y-3">
-          <h2 className="text-lg font-semibold">Linked students</h2>
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-black/60">
+            <span className="h-2 w-2 rounded-full bg-accent-green" />
+            Linked students
+          </div>
           <div className="space-y-2">
             {students?.length ? (
               students.map((student) => (

@@ -79,7 +79,7 @@ export default async function SrsPage({
         </p>
         <Link
           href={`/practice?deck=${deck === "all" ? "A" : deck}&mode=due`}
-          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white"
+          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-soft"
         >
           Start due reviews
         </Link>
