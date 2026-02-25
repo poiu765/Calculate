@@ -109,7 +109,7 @@ export default function PracticePage() {
 
       <Card className="space-y-4">
         {loading ? (
-          <p className="text-sm text-black/70">Loading question...</p>
+          <p className="text-sm text-black/70">Loading next question...</p>
         ) : question ? (
           <>
             <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-black/50">
@@ -132,14 +132,10 @@ export default function PracticePage() {
               </p>
             </div>
             {status === "correct" && (
-              <p className="text-sm font-semibold text-black">
-                Correct. Nice speed.
-              </p>
+              <p className="text-sm font-semibold text-black">Correct.</p>
             )}
             {status === "wrong" && (
-              <p className="text-sm font-semibold text-black">
-                Logged. Keep going.
-              </p>
+              <p className="text-sm font-semibold text-black">Logged.</p>
             )}
           </>
         ) : (

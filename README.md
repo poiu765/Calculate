@@ -50,6 +50,11 @@ select * from attempts; -- should show only own
 - Due items are served first; if none are due, new problems are generated.
 - New questions only create SRS items when wrong or too slow.
 
+## 운영/테스트 메모
+
+- `.env.local`가 없으면 Supabase 클라이언트가 초기화되지 않습니다.
+- 보안/권한 라우트 가드는 현재 비활성화 상태입니다. (1차 완성본 이후 재활성화 예정)
+
 ## 1차 완성본 체크리스트
 
 - [x] 로그인/회원가입 화면

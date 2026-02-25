@@ -44,6 +44,10 @@ export default async function StudentDetailPage({
     }
   });
 
+  const topWrong = Object.entries(wrongByOp)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3);
+
   const slowAttempts = attempts
     ?.filter((a) => a.is_correct)
     .sort((a, b) => b.time_ms - a.time_ms)
@@ -99,15 +103,20 @@ export default async function StudentDetailPage({
       <section className="grid gap-3 md:grid-cols-2">
         <Card className="space-y-2">
           <h2 className="text-lg font-semibold">Top wrong op types</h2>
-          {Object.keys(wrongByOp).length ? (
-            Object.entries(wrongByOp)
-              .sort((a, b) => b[1] - a[1])
-              .slice(0, 4)
-              .map(([op, count]) => (
-                <p key={op} className="text-sm">
-                  {op}: {count}
-                </p>
-              ))
+          {topWrong.length ? (
+            <div className="space-y-2">
+              {topWrong.map(([op, count]) => (
+                <div
+                  key={op}
+                  className="flex items-center justify-between rounded-md border border-black/10 px-3 py-2 text-sm"
+                >
+                  <span className="font-semibold">{op}</span>
+                  <span className="rounded-full bg-accent-yellow px-2 py-1 text-xs font-semibold">
+                    {count} wrong
+                  </span>
+                </div>
+              ))}
+            </div>
           ) : (
             <p className="text-sm text-black/60">No wrong attempts yet.</p>
           )}
