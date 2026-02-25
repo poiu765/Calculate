@@ -38,19 +38,25 @@ export default async function SrsPage({
       <div className="flex flex-wrap gap-2">
         <Link
           href={`/student/srs?deck=all&show=${show}`}
-          className="rounded-full border border-black px-3 py-1 text-xs font-semibold"
+          className={`rounded-full px-3 py-1 text-xs font-semibold ${
+            deck === "all" ? "bg-accent-yellow" : "border border-black"
+          }`}
         >
           All decks
         </Link>
         <Link
           href={`/student/srs?deck=A&show=${show}`}
-          className="rounded-full border border-black px-3 py-1 text-xs font-semibold"
+          className={`rounded-full px-3 py-1 text-xs font-semibold ${
+            deck === "A" ? "bg-accent-yellow" : "border border-black"
+          }`}
         >
           Deck A
         </Link>
         <Link
           href={`/student/srs?deck=B&show=${show}`}
-          className="rounded-full border border-black px-3 py-1 text-xs font-semibold"
+          className={`rounded-full px-3 py-1 text-xs font-semibold ${
+            deck === "B" ? "bg-accent-yellow" : "border border-black"
+          }`}
         >
           Deck B
         </Link>
@@ -102,7 +108,12 @@ export default async function SrsPage({
             </Card>
           ))
         ) : (
-          <p className="text-sm text-black/70">No items yet.</p>
+          <Card>
+            <p className="text-sm text-black/70">No items yet.</p>
+            <p className="text-xs text-black/50">
+              Practice normally to create items that need review.
+            </p>
+          </Card>
         )}
       </div>
     </main>

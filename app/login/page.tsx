@@ -141,11 +141,14 @@ export default function LoginPage() {
           )}
 
           {error && <p className="text-sm text-red-600">{error}</p>}
-          {message && <p className="text-sm text-green-600">{message}</p>}
+          {message && <p className="text-sm text-black">{message}</p>}
 
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Working..." : mode === "sign-in" ? "Sign in" : "Create account"}
           </Button>
+          <p className="text-xs text-black/50">
+            Tip: use separate accounts for teacher and student to test linking.
+          </p>
         </form>
       </Card>
     </main>

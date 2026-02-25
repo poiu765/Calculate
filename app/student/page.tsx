@@ -109,6 +109,9 @@ export default async function StudentPage() {
           >
             View SRS list
           </Link>
+          <p className="text-xs text-black/50">
+            Due items surface here first to keep your speed sharp.
+          </p>
         </Card>
         <Card className="space-y-3">
           <h2 className="text-lg font-semibold">Link to teacher</h2>

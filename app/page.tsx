@@ -13,6 +13,21 @@ export default function HomePage() {
         </p>
       </header>
 
+      <section className="grid gap-3 md:grid-cols-3">
+        <div className="rounded-xl border border-black/10 p-4 text-sm shadow-soft">
+          <p className="text-xs uppercase tracking-wide text-black/60">Deck A</p>
+          <p className="font-semibold">3-digit add/sub</p>
+        </div>
+        <div className="rounded-xl border border-black/10 p-4 text-sm shadow-soft">
+          <p className="text-xs uppercase tracking-wide text-black/60">Deck B</p>
+          <p className="font-semibold">2-digit mul/div</p>
+        </div>
+        <div className="rounded-xl border border-black/10 p-4 text-sm shadow-soft">
+          <p className="text-xs uppercase tracking-wide text-black/60">SRS</p>
+          <p className="font-semibold">Review what you miss</p>
+        </div>
+      </section>
+
       <div className="flex flex-wrap gap-3">
         <Link
           href="/login"

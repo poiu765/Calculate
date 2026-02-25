@@ -44,6 +44,11 @@ export default async function StudentDetailPage({
     }
   });
 
+  const slowAttempts = attempts
+    ?.filter((a) => a.is_correct)
+    .sort((a, b) => b.time_ms - a.time_ms)
+    .slice(0, 3);
+
   return (
     <main className="space-y-6">
       <header className="space-y-2">
@@ -118,6 +123,27 @@ export default async function StudentDetailPage({
             ))}
             {!attempts?.length && <p className="text-black/60">No attempts yet.</p>}
           </div>
+        </Card>
+      </section>
+
+      <section className="grid gap-3 md:grid-cols-2">
+        <Card className="space-y-2">
+          <h2 className="text-lg font-semibold">Slowest correct (ms)</h2>
+          {slowAttempts?.length ? (
+            slowAttempts.map((attempt, idx) => (
+              <p key={idx} className="text-sm text-black/70">
+                {attempt.op_type} • {attempt.time_ms} ms
+              </p>
+            ))
+          ) : (
+            <p className="text-sm text-black/60">No correct attempts yet.</p>
+          )}
+        </Card>
+        <Card className="space-y-2">
+          <h2 className="text-lg font-semibold">Focus suggestion</h2>
+          <p className="text-sm text-black/70">
+            Target the op type with the most wrongs and repeat 10 fast reps.
+          </p>
         </Card>
       </section>
     </main>
